@@ -134,8 +134,7 @@ def spaceman(secret_word):
     letters = ""
     end_game = False
     round = 7
-
-    print(secret_word)
+    all_letters = ""
 
     #TODO: show the player information about the game according to the project spec
     print("Welcome to Spaceman!")
@@ -145,20 +144,27 @@ def spaceman(secret_word):
 
 
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
-
     while(end_game == False):
         letter = check_letters(user_input("Enter a letter: "))
+
+        if(is_guess_in_word(letter, word)):
+            print("You've already guessed that letter")
 
     #TODO: Check if the guessed letter is in the secret or not and give the player feedback
         if(is_guess_in_word(letter, secret_word)):
             print("Your guess appears in the word!")
             letters += letter
+            all_letters += letter
+
+        elif(letter in all_letters):
+            print("You've already guess that letter: "+letter)
+
         else:
             round -= 1
             print("Sorry your guess was not in the word, try again")
             print("You have "+str(round)+" guesses left!")
             draw_spaceman()
-
+            all_letters += letter
 
 
     #TODO: show the guessed word so far
@@ -171,8 +177,8 @@ def spaceman(secret_word):
             end_game = True
 
         elif(round < 1):
-            end_game = True
             print("Sorry you lost! The secret word is: "+secret_word)
+            end_game = True
 
 
 #These function calls that will start the game
