@@ -124,6 +124,12 @@ def draw_spaceman():
 
     print(spaceman)
 
+#These function calls that will start the game
+def start_game():
+    secret_word = load_word()
+    spaceman(load_word())
+
+
 def spaceman(secret_word):
     '''
     A function that controls the game of spaceman. Will start spaceman in the command line.
@@ -180,7 +186,15 @@ def spaceman(secret_word):
             print("Sorry you lost! The secret word is: "+secret_word)
             end_game = True
 
+    play_again = user_input("Do you want to play the game again?: y/n ")
 
-#These function calls that will start the game
-secret_word = load_word()
-spaceman(load_word())
+    if(play_again == "y"):
+        print("Great! game is starting...")
+        start_game()
+
+    elif(play_again == "n"):
+        print("Goodbye!")
+
+
+
+start_game()
