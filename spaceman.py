@@ -133,13 +133,13 @@ def spaceman(secret_word):
     word = ""
     letters = ""
     end_game = False
-    round = 7
+    round = len(secret_word)
     all_letters = ""
 
     #TODO: show the player information about the game according to the project spec
     print("Welcome to Spaceman!")
     print("The secret word contains: "+str(len(secret_word))+" letters")
-    print("You have 7 incorrect guesses, please enter one letter per round")
+    print("You have "+str(round)+" incorrect guesses, please enter one letter per round")
     print("-------------------------------------")
 
 
