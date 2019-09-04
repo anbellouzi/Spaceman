@@ -43,18 +43,21 @@ def get_guessed_word(secret_word, letters_guessed):
     '''
 
     #TODO: Loop through the letters in secret word and build a string that shows the letters that have been guessed correctly so far that are saved in letters_guessed and underscores for the letters that have not been guessed yet
-    correct_words = ''
+    correct_words = ""
 
-    for letter in secret_word:
-        if(letter == letters_guessed):
-            correct_words.append(letters_guessed)
+    for i in range(0, len(secret_word)):
+        match = False
+        for j in range(0, len(letters_guessed)):
+            if(secret_word[i] == letters_guessed[j]):
+                match = True
+
+        if match == True:
+            correct_words += secret_word[i]
         else:
-            correct_words.append("_")
-
+            correct_words += "-"
 
     return correct_words
 
-    pass
 
 
 def is_guess_in_word(guess, secret_word):
@@ -67,34 +70,59 @@ def is_guess_in_word(guess, secret_word):
         bool: True if the guess is in the secret_word, False otherwise
     '''
     #TODO: check if the letter guess is in the secret word
+    if guess in secret_word:
+        return True
+    else:
+        return False
 
-    for letter in secret_word:
-        if(letter == guessed):
-            return True
-        else:
-            return False
-    pass
 
 # user input
 def user_input(prompt):
     user_input = input(prompt)
     return user_input
 
-# remove white spaces
-def white_space(letter):
-    letter.replace(" ", "")
-
-    if(letter == ""):
-        return True
-    else:
-        return False
-
 # checks if user entered one letter
 def check_letters(letter):
-    while (len(letter) > 1):
-        print("That's more than one letter, please enter one letter only")
-        letter = user_input("Enter a letter: ")
+    check = False
+
+    while (check == False):
+        if(len(letter) > 1):
+            print("That's more than one letter, please enter one letter only")
+            letter = user_input("Enter a letter: ")
+
+        elif (letter.isspace() == True):
+            print("That's a white space, please enter a letter only")
+            letter = user_input("Enter a letter: ")
+
+        else:
+            check = True
+
     return letter
+
+def draw_spaceman():
+    spaceman = """                      <>\n"""
+    spaceman += """        .-'""-.       ||::::::==========\n"""
+    spaceman += """       /= ___  \\      ||::::::==========\n"""
+    spaceman += """      |- /~~~\\  |     ||::::::==========\n"""
+    spaceman += """      |=( '.' ) |     ||================\n"""
+    spaceman += """      \\__\\_=_/__/     ||================\n"""
+    spaceman += """       {_______}      ||================\n"""
+    spaceman += """     /` *       `'--._||\n"""
+    spaceman += """    /= .     [] .     { >\n"""
+    spaceman += """   /  /|ooo     |`'--'||\n"""
+    spaceman += """  (   )\\_______/      ||\n"""
+    spaceman += """   \\``\\/       \\      ||\n"""
+    spaceman += """`    -| ==    \\_|     ||\n"""
+    spaceman += """      /         |     ||\n"""
+    spaceman += """     |=   >\\  __/     ||\n"""
+    spaceman += """     \\   \\ |- --|     ||\n"""
+    spaceman += """      \\ __| \\___/     ||\n"""
+    spaceman += """      _{__} _{__}     ||\n"""
+    spaceman += """     (    )(    )     ||\n"""
+    spaceman += """^^~  `"''''  `''''  ~^^^~^^~~~^^^~^^^~^^^~^^~^\n"""
+
+
+    print(spaceman)
 
 def spaceman(secret_word):
     '''
@@ -102,7 +130,12 @@ def spaceman(secret_word):
     Args:
       secret_word (string): the secret word to guess.
     '''
+    word = ""
+    letters = ""
+    end_game = False
+    round = 7
 
+    print(secret_word)
 
     #TODO: show the player information about the game according to the project spec
     print("Welcome to Spaceman!")
@@ -112,25 +145,31 @@ def spaceman(secret_word):
 
 
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
-    letters = user_input("Enter a letter: ")
-    letters = check_letters(letters)
-    # if(white_space(letters) == True):
-    #     letters = check_letters(letters)
-    #     print("hello")
-    #
 
-
-
+    while(end_game == False):
+        letter = check_letters(user_input("Enter a letter: "))
 
     #TODO: Check if the guessed letter is in the secret or not and give the player feedback
+        if(is_guess_in_word(letter, secret_word)):
+            print("Your guess appears in the word!")
+            letters += letter
+        else:
+            print("Sorry your guess was not in the word, try again")
+            draw_spaceman()
+            round -= 1
+
 
     #TODO: show the guessed word so far
+        word = get_guessed_word(secret_word, letters)
+        print("Your guess so far: "+word)
 
     #TODO: check if the game has been won or lost
+        if(word == secret_word):
+            print("Game ended! You've Won")
+            end_game = True
 
-
-
-
+        elif(round < 1):
+            end_game = True
 
 
 #These function calls that will start the game
