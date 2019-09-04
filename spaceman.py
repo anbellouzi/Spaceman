@@ -58,8 +58,6 @@ def get_guessed_word(secret_word, letters_guessed):
 
     return correct_words
 
-
-
 def is_guess_in_word(guess, secret_word):
     '''
     A function to check if the guessed letter is in the secret word
@@ -74,7 +72,6 @@ def is_guess_in_word(guess, secret_word):
         return True
     else:
         return False
-
 
 # user input
 def user_input(prompt):
@@ -129,7 +126,6 @@ def start_game():
     secret_word = load_word()
     spaceman(load_word())
 
-
 def spaceman(secret_word):
     '''
     A function that controls the game of spaceman. Will start spaceman in the command line.
@@ -147,7 +143,6 @@ def spaceman(secret_word):
     print("The secret word contains: "+str(len(secret_word))+" letters")
     print("You have "+str(round)+" incorrect guesses, please enter one letter per round")
     print("-------------------------------------")
-
 
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
     while(end_game == False):
@@ -168,10 +163,9 @@ def spaceman(secret_word):
         else:
             round -= 1
             print("Sorry your guess was not in the word, try again")
-            print("You have "+str(round)+" guesses left!")
             draw_spaceman()
+            print("You have "+str(round)+" guesses left!")
             all_letters += letter
-
 
     #TODO: show the guessed word so far
         word = get_guessed_word(secret_word, letters)
@@ -186,15 +180,13 @@ def spaceman(secret_word):
             print("Sorry you lost! The secret word is: "+secret_word)
             end_game = True
 
-    play_again = user_input("Do you want to play the game again?: y/n ")
-
+    play_again = check_letters(user_input("Do you want to play the game again?: y/n "))
     if(play_again == "y"):
-        print("Great! game is starting...")
+        print("Great! game is starting...\n")
         start_game()
 
     elif(play_again == "n"):
         print("Goodbye!")
-
-
+        draw_spaceman()
 
 start_game()
