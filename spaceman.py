@@ -154,9 +154,11 @@ def spaceman(secret_word):
             print("Your guess appears in the word!")
             letters += letter
         else:
-            print("Sorry your guess was not in the word, try again")
-            draw_spaceman()
             round -= 1
+            print("Sorry your guess was not in the word, try again")
+            print("You have "+str(round)+" guesses left!")
+            draw_spaceman()
+
 
 
     #TODO: show the guessed word so far
@@ -170,6 +172,7 @@ def spaceman(secret_word):
 
         elif(round < 1):
             end_game = True
+            print("Sorry you lost! The secret word is: "+secret_word)
 
 
 #These function calls that will start the game
