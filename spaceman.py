@@ -116,6 +116,9 @@ def spaceman(secret_word):
         elif(letter in all_letters):
             print("You've already guess that letter: "+letter)
 
+        elif(letter.isalpha() == False):
+            print("That's not an alphabet, please enter an alphabet")
+
         else:
             round -= 1
             print("Sorry your guess was not in the word, try again")
