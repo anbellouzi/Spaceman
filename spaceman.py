@@ -96,9 +96,15 @@ def spaceman(secret_word):
 
     #TODO: show the player information about the game according to the project spec
     print("Welcome to Spaceman!")
+    username = user_input("What is your name: ")
+    print("Hello "+username+"! Spaceman is a word guessing game")
+    print("Guess the hidden word 1 letter at a time to win the game.")
+    print("Good luck!")
+    print("-------------------------------------")
     print("The secret word contains: "+str(len(secret_word))+" letters")
     print("You have "+str(round)+" incorrect guesses, please enter one letter per round")
     print("-------------------------------------")
+    print("")
 
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
     while(end_game == False):
@@ -111,24 +117,25 @@ def spaceman(secret_word):
         if(is_guess_in_word(letter, secret_word)):
             print("Your guess appears in the word!")
             letters += letter
-            all_letters += letter
+            all_letters += letter+", "
 
         elif(letter in all_letters):
             print("You've already guess that letter: "+letter)
 
         elif(letter.isalpha() == False):
-            print("That's not an alphabet, please enter an alphabet")
+            print("That's not a letter in the alphabet, please enter a letter")
 
         else:
             round -= 1
-            print("Sorry your guess was not in the word, try again")
             draw_spaceman()
+            print("Sorry your guess was not in the hidden word, try again")
             print("You have "+str(round)+" guesses left!")
-            all_letters += letter
+            all_letters += letter+", "
 
     #TODO: show the guessed word so far
         word = get_guessed_word(secret_word, letters)
         print("Your guess so far: "+word)
+        print("Letters guessed: "+all_letters)
 
     #TODO: check if the game has been won or lost
         if(word == secret_word):
@@ -145,7 +152,7 @@ def spaceman(secret_word):
         start_game()
 
     elif(play_again == "n"):
-        print("Goodbye!")
         draw_spaceman()
+        print("Goodbye!")
 
 start_game()
