@@ -1,5 +1,6 @@
 import random
 
+# returns random word from words.txt
 def load_word():
     f = open('words.txt', 'r')
     words_list = f.readlines()
@@ -9,6 +10,7 @@ def load_word():
     secret_word = random.choice(words_list)
     return secret_word
 
+# Did utilize this function
 def is_word_guessed(secret_word, letters_guessed):
     for letter in secret_word:
         if(letter == letters_guessed):
@@ -16,7 +18,7 @@ def is_word_guessed(secret_word, letters_guessed):
         else:
             return False
 
-
+# returns a word with letters guessed or - in the correct index
 def get_guessed_word(secret_word, letters_guessed):
     correct_words = ""
     for i in range(0, len(secret_word)):
@@ -30,6 +32,7 @@ def get_guessed_word(secret_word, letters_guessed):
             correct_words += "-"
     return correct_words
 
+# returns a bool if guess is in secret word
 def is_guess_in_word(guess, secret_word):
     if guess in secret_word:
         return True
@@ -44,12 +47,12 @@ def user_input(prompt):
 # checks if user entered one letter
 def check_letters(letter):
     check = False
-    while (check == False):
+    while (not check):
         if(len(letter) > 1):
             print("That's more than one letter, please enter one letter only")
             letter = user_input("Enter a letter: ")
 
-        elif (letter.isspace() == True):
+        elif (letter.isspace() or letter == ""):
             print("That's a white space, please enter a letter only")
             letter = user_input("Enter a letter: ")
 
@@ -107,7 +110,7 @@ def spaceman(secret_word):
     print("")
 
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
-    while(end_game == False):
+    while(not end_game):
         letter = check_letters(user_input("Enter a letter: "))
 
         if(is_guess_in_word(letter, word)):
@@ -154,5 +157,6 @@ def spaceman(secret_word):
     elif(play_again == "n"):
         draw_spaceman()
         print("Goodbye!")
+
 
 start_game()
