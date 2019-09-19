@@ -10,7 +10,7 @@ def load_word():
     secret_word = random.choice(words_list)
     return secret_word
 
-# Did utilize this function
+# Did not utilize this function
 def is_word_guessed(secret_word, letters_guessed):
     for letter in secret_word:
         if(letter == letters_guessed):
@@ -158,5 +158,5 @@ def spaceman(secret_word):
         draw_spaceman()
         print("Goodbye!")
 
-
-start_game()
+if __name__ == '__main__':
+    start_game()
